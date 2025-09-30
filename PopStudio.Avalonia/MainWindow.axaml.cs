@@ -23,7 +23,7 @@ namespace PopStudio.Avalonia
             if (Setting.OpenProgramAD) ShowAD(new Random().Next(1, 4));
             Prepare();
             //Binding size changed event
-            //this.GetObservable(ClientSizeProperty).Subscribe(Window_SizeChanged);
+            SizeChanged += Window_SizeChanged;
         }
 
         //private void Label_Head_PointerMoved(object sender, global::Avalonia.Input.PointerEventArgs e)
@@ -160,9 +160,9 @@ namespace PopStudio.Avalonia
 
         private void Image_Shell_Tapped(object sender, RoutedEventArgs e) => OpenShellPage();
 
-        private void Window_SizeChanged(Size size)
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (size.Width < 500)
+            if (e.NewSize.Width < 500)
             {
                 HideShell();
             }
