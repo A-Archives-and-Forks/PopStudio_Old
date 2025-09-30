@@ -15,11 +15,8 @@ namespace PopStudio.Avalonia.Pages
             InitializeComponent();
             LoadControl();
             LoadFont();
-            CB_CMode.Items = new List<string>
-            {
-                "Simple RTON",
-                "Encrypted RTON"
-            };
+            CB_CMode.Items.Add("Simple RTON");
+            CB_CMode.Items.Add("Encrypted RTON");
             CB_CMode.SelectedIndex = 0;
             MAUIStr.OnLanguageChanged += LoadFont;
         }

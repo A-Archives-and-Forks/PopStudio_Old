@@ -15,29 +15,23 @@ namespace PopStudio.Avalonia.Pages
             InitializeComponent();
             LoadControl();
             LoadFont();
-            CB_InMode.Items = new List<string>
-            {
-                "PC_Compiled",
-                "Phone32_Compiled",
-                "Phone64_Compiled",
-                "WP_Xnb",
-                "GameConsole_Compiled",
-                "TV_Compiled",
-                "Studio_Json",
-                "Raw_Xml"
-            };
+            CB_InMode.Items.Add("PC_Compiled");
+            CB_InMode.Items.Add("Phone32_Compiled");
+            CB_InMode.Items.Add("Phone64_Compiled");
+            CB_InMode.Items.Add("WP_Xnb");
+            CB_InMode.Items.Add("GameConsole_Compiled");
+            CB_InMode.Items.Add("TV_Compiled");
+            CB_InMode.Items.Add("Studio_Json");
+            CB_InMode.Items.Add("Raw_Xml");
             CB_InMode.SelectedIndex = 0;
-            CB_OutMode.Items = new List<string>
-            {
-                "PC_Compiled",
-                "Phone32_Compiled",
-                "Phone64_Compiled",
-                "WP_Xnb",
-                "GameConsole_Compiled",
-                "TV_Compiled",
-                "Studio_Json",
-                "Raw_Xml"
-            };
+            CB_OutMode.Items.Add("PC_Compiled");
+            CB_OutMode.Items.Add("Phone32_Compiled");
+            CB_OutMode.Items.Add("Phone64_Compiled");
+            CB_OutMode.Items.Add("WP_Xnb");
+            CB_OutMode.Items.Add("GameConsole_Compiled");
+            CB_OutMode.Items.Add("TV_Compiled");
+            CB_OutMode.Items.Add("Studio_Json");
+            CB_OutMode.Items.Add("Raw_Xml");
             CB_OutMode.SelectedIndex = 7;
             MAUIStr.OnLanguageChanged += LoadFont;
         }

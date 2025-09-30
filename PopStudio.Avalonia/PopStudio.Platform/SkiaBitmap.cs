@@ -73,7 +73,7 @@ namespace PopStudio.Platform
         {
             using (SKPixmap sKPixmap = m_bitmap.PeekPixels())
             {
-                using (SKData p = sKPixmap?.Encode(new SKPngEncoderOptions { ZLibLevel = 1 }))
+                using (SKData p = sKPixmap?.Encode(new SKPngEncoderOptions(SKPngEncoderFilterFlags.NoFilters, 1)))
                 {
                     using (FileStream fs = new FileStream(filePath, FileMode.Create))
                     {
@@ -89,7 +89,7 @@ namespace PopStudio.Platform
         {
             using (SKPixmap sKPixmap = m_bitmap.PeekPixels())
             {
-                using (SKData p = sKPixmap?.Encode(new SKPngEncoderOptions { ZLibLevel = 1 }))
+                using (SKData p = sKPixmap?.Encode(new SKPngEncoderOptions(SKPngEncoderFilterFlags.NoFilters, 1)))
                 {
                     byte[] t = p.ToArray();
                     stream.Write(t, 0, t.Length);

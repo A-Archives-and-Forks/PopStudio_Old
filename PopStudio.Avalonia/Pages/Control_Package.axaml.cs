@@ -15,13 +15,10 @@ namespace PopStudio.Avalonia.Pages
             InitializeComponent();
             LoadControl();
             LoadFont();
-            CB_CMode.Items = new List<string>
-            {
-                "dz",
-                "rsb",
-                "pak",
-                "arcv"
-            };
+            CB_CMode.Items.Add("dz");
+            CB_CMode.Items.Add("rsb");
+            CB_CMode.Items.Add("pak");
+            CB_CMode.Items.Add("arcv");
             CB_CMode.SelectedIndex = 0;
             MAUIStr.OnLanguageChanged += LoadFont;
         }

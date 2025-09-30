@@ -1,8 +1,9 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="PopStudio.Avalonia.App">
+             x:Class="PopStudio.Avalonia.App"
+             RequestedThemeVariant="Light">
     <Application.Styles>
-        <FluentTheme Mode="Light" />
+        <FluentTheme />
 		<Style Selector="Button">
 			<Setter Property="FontFamily" Value="avares://PopStudio/Assets/Fonts#MiSans" />
 			<Setter Property="HorizontalAlignment" Value="Stretch" />

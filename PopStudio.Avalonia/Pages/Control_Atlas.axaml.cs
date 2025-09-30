@@ -15,36 +15,27 @@ namespace PopStudio.Avalonia.Pages
             InitializeComponent();
             LoadControl();
             LoadFont();
-            CB_Mode.Items = new List<string>
-            {
-                "RESOURCES.XML(Rsb)",
-                "resources.xml(Old)",
-                "resources.xml(Ancient)",
-                "plist(Free)",
-                "atlasimagemap.dat",
-                "xml(TV)",
-                "RESOURCES.RTON(Rsb)"
-            };
+            CB_Mode.Items.Add("RESOURCES.XML(Rsb)");
+            CB_Mode.Items.Add("resources.xml(Old)");
+            CB_Mode.Items.Add("resources.xml(Ancient)");
+            CB_Mode.Items.Add("plist(Free)");
+            CB_Mode.Items.Add("atlasimagemap.dat");
+            CB_Mode.Items.Add("xml(TV)");
+            CB_Mode.Items.Add("RESOURCES.RTON(Rsb)");
             CB_Mode.SelectedIndex = 0;
-            CB_MaxWidth.Items = new List<string>
-            {
-                "256",
-                "512",
-                "1024",
-                "2048",
-                "4096",
-                "8192"
-            };
+            CB_MaxWidth.Items.Add("256");
+            CB_MaxWidth.Items.Add("512");
+            CB_MaxWidth.Items.Add("1024");
+            CB_MaxWidth.Items.Add("2048");
+            CB_MaxWidth.Items.Add("4096");
+            CB_MaxWidth.Items.Add("8192");
             CB_MaxWidth.SelectedIndex = 3;
-            CB_MaxHeight.Items = new List<string>
-            {
-                "256",
-                "512",
-                "1024",
-                "2048",
-                "4096",
-                "8192"
-            };
+            CB_MaxHeight.Items.Add("256");
+            CB_MaxHeight.Items.Add("512");
+            CB_MaxHeight.Items.Add("1024");
+            CB_MaxHeight.Items.Add("2048");
+            CB_MaxHeight.Items.Add("4096");
+            CB_MaxHeight.Items.Add("8192");
             CB_MaxHeight.SelectedIndex = 3;
             MAUIStr.OnLanguageChanged += LoadFont;
         }

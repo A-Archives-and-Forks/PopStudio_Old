@@ -15,47 +15,53 @@ namespace PopStudio.Avalonia.Pages
             InitializeComponent();
             LoadControl();
             LoadFont();
-            CB_CMode.Items = new List<string>
+            foreach (var item in new List<string>
+                     {
+                         "PTX(rsb)",
+                         "cdat(Android,iOS)",
+                         "tex(iOS)",
+                         "txz(Android,iOS)",
+                         "tex(TV)",
+                         "ptx(Xbox360)",
+                         "ptx(PS3)",
+                         "ptx(PSV)",
+                         "xnb(Windows Phone)"
+                     })
             {
-                "PTX(rsb)",
-                "cdat(Android,iOS)",
-                "tex(iOS)",
-                "txz(Android,iOS)",
-                "tex(TV)",
-                "ptx(Xbox360)",
-                "ptx(PS3)",
-                "ptx(PSV)",
-                "xnb(Windows Phone)"
-            };
+                CB_CMode.Items.Add(item);
+            }
             CB_CMode.SelectedIndex = 0;
-            CB_FMode.Items = new List<string>
+            foreach (var item in new List<string>
+                     {
+                         "ARGB8888(0)",
+                         "ABGR8888(0)",
+                         "RGBA4444(1)",
+                         "RGB565(2)",
+                         "RGBA5551(3)",
+                         "RGBA4444_Block(21)",
+                         "RGB565_Block(22)",
+                         "RGBA5551_Block(23)",
+                         "ARGB8888_A8(149)",
+                         "ABGR8888_A8(149)",
+                         "ARGB8888(BE)(0)",
+                         "ARGB8888_Padding(BE)(0)",
+                         "DXT1_RGB(35)",
+                         "DXT3_RGBA(36)",
+                         "DXT5_RGBA(37)",
+                         "DXT5_RGBA_MortonBlock(5)",
+                         "DXT5_RGBA(BE)(5)",
+                         "ETC1_RGB(32)",
+                         "ETC1_RGB_A8(147)",
+                         "ETC1_RGB_A_Palette(147)",
+                         "PVRTC_4BPP_RGBA(30)",
+                         "PVRTC_4BPP_RGBA_A8(148)",
+                         "PVRTC_2BPP_RGBA(31)",
+                         "ATC_RGB(38)",
+                         "ATC_RGBA4(39)",
+                     })
             {
-                "ARGB8888(0)",
-                "ABGR8888(0)",
-                "RGBA4444(1)",
-                "RGB565(2)",
-                "RGBA5551(3)",
-                "RGBA4444_Block(21)",
-                "RGB565_Block(22)",
-                "RGBA5551_Block(23)",
-                "ARGB8888_A8(149)",
-                "ABGR8888_A8(149)",
-                "ARGB8888(BE)(0)",
-                "ARGB8888_Padding(BE)(0)",
-                "DXT1_RGB(35)",
-                "DXT3_RGBA(36)",
-                "DXT5_RGBA(37)",
-                "DXT5_RGBA_MortonBlock(5)",
-                "DXT5_RGBA(BE)(5)",
-                "ETC1_RGB(32)",
-                "ETC1_RGB_A8(147)",
-                "ETC1_RGB_A_Palette(147)",
-                "PVRTC_4BPP_RGBA(30)",
-                "PVRTC_4BPP_RGBA_A8(148)",
-                "PVRTC_2BPP_RGBA(31)",
-                "ATC_RGB(38)",
-                "ATC_RGBA4(39)",
-            };
+                CB_FMode.Items.Add(item);
+            }
             CB_FMode.SelectedIndex = 0;
             CB_CMode.SelectionChanged += CB_CMode_Selected;
             MAUIStr.OnLanguageChanged += LoadFont;
@@ -330,7 +336,8 @@ namespace PopStudio.Avalonia.Pages
         private void CB_CMode_Selected(object sender, SelectionChangedEventArgs e)
         {
             int index = CB_CMode.SelectedIndex;
-            List<string> FMode_Items = new List<string>();
+            var FMode_Items = CB_FMode.Items;
+            FMode_Items.Clear();
             switch (index)
             {
                 case 0:
@@ -399,7 +406,6 @@ namespace PopStudio.Avalonia.Pages
                     FMode_Items.Add("ABGR8888");
                     break;
             }
-            CB_FMode.Items = FMode_Items;
             CB_FMode.SelectedIndex = 0;
         }
     }

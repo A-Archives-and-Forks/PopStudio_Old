@@ -562,12 +562,10 @@ namespace PopStudio.Avalonia.Pages
         {
             xflwidth.Text = Setting.ReanimXflWidth.ToString();
             xflheight.Text = Setting.ReanimXflHeight.ToString();
-            xfllabelname.Items = new List<string>
-            {
-                "Image Name",
-                "Short Name",
-                "Label Name"
-            };
+            xfllabelname.Items.Clear();
+            xfllabelname.Items.Add("Image Name");
+            xfllabelname.Items.Add("Short Name");
+            xfllabelname.Items.Add("Label Name");
             xfllabelname.SelectedIndex = Setting.ReanimXflLabelName + 1;
             //xfllabelname.Text = Setting.ReanimXflLabelName.ToString();
             xflscalex.Text = Setting.ReanimXflScaleX.ToString();

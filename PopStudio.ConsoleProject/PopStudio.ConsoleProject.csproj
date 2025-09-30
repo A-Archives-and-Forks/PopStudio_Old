@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
@@ -15,84 +15,19 @@
 	  <ApplicationIcon>Icon.ico</ApplicationIcon>
 	  <FileVersion>6.0</FileVersion>
 	  <AssemblyName>PopStudio</AssemblyName>
-	  <!--<RuntimeIdentifiers>win-x86;win-x64;win-arm64;osx-x64;osx-arm64;linux-x64;linux-arm;linux-arm64;linux-musl-x64;linux-musl-arm;linux-musl-arm64</RuntimeIdentifiers>-->
   </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<DefineConstants>TRACE;WINDOWSCONSOLE</DefineConstants>
-		<DebugType>full</DebugType>
-	</PropertyGroup>
+    <PropertyGroup>
+        <DefineConstants Condition="$(RuntimeIdentifier.Contains('win'))">$(DefineConstants);WINDOWSCONSOLE</DefineConstants>
+        <DefineConstants Condition="$(RuntimeIdentifier.Contains('osx'))">$(DefineConstants);MACOSCONSOLE</DefineConstants>
+        <DefineConstants Condition="$(RuntimeIdentifier.Contains('linux'))">$(DefineConstants);LINUXCONSOLE</DefineConstants>
+    </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DefineConstants>TRACE;WINDOWSCONSOLE</DefineConstants>
-		<DebugType>none</DebugType>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-x64'">
-		<DefineConstants>TRACE;LINUXCONSOLE</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-arm'">
-		<DefineConstants>TRACE;LINUXCONSOLE</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-arm64'">
-		<DefineConstants>TRACE;LINUXCONSOLE</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-musl-x64'">
-		<DefineConstants>TRACE;LINUXCONSOLE</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-musl-arm'">
-		<DefineConstants>TRACE;LINUXCONSOLE</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-musl-arm64'">
-		<DefineConstants>TRACE;LINUXCONSOLE</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|osx-x64'">
-		<DefineConstants>TRACE;MACOSCONSOLE</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|osx-arm64'">
-		<DefineConstants>TRACE;MACOSCONSOLE</DefineConstants>
-	</PropertyGroup>
-
-	<!--AOT Support-->
-
-	<!--<ItemGroup>
-		<RdXmlFile Include="rd.xml" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|win-x64'">
-		<PackageReference Include="Microsoft.DotNet.ILCompiler; runtime.win-x64.Microsoft.DotNet.ILCompiler" Version="7.0.0-*" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|win-arm64'">
-		<PackageReference Include="Microsoft.DotNet.ILCompiler; runtime.win-x64.Microsoft.DotNet.ILCompiler" Version="7.0.0-*" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|osx-x64'">
-		<PackageReference Include="Microsoft.DotNet.ILCompiler; runtime.osx-x64.Microsoft.DotNet.ILCompiler" Version="7.0.0-*" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-x64'">
-		<PackageReference Include="Microsoft.DotNet.ILCompiler; runtime.linux-x64.Microsoft.DotNet.ILCompiler" Version="7.0.0-*" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-musl-x64'">
-		<PackageReference Include="Microsoft.DotNet.ILCompiler; runtime.linux-x64.Microsoft.DotNet.ILCompiler" Version="7.0.0-*" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-arm64'">
-		<PackageReference Include="Microsoft.DotNet.ILCompiler; runtime.linux-x64.Microsoft.DotNet.ILCompiler" Version="7.0.0-*" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-musl-arm64'">
-		<PackageReference Include="Microsoft.DotNet.ILCompiler; runtime.linux-x64.Microsoft.DotNet.ILCompiler" Version="7.0.0-*" />
-	</ItemGroup>-->
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+        <DefineConstants Condition="$([MSBuild]::IsOSPlatform('Windows'))">$(DefineConstants);WINDOWSCONSOLE</DefineConstants>
+        <DefineConstants Condition="$([MSBuild]::IsOSPlatform('OSX'))">$(DefineConstants);MACOSCONSOLE</DefineConstants>
+        <DefineConstants Condition="$([MSBuild]::IsOSPlatform('Linux'))">$(DefineConstants);LINUXCONSOLE</DefineConstants>
+    </PropertyGroup>
 
 	<ItemGroup>
 	  <None Remove="Icon.ico" />
@@ -102,64 +37,27 @@
 	  <Content Include="Icon.ico" />
 	</ItemGroup>
 
+    <ItemGroup>
+        <TrimmerRootAssembly Include="MoonSharp.Interpreter" />
+    </ItemGroup>
+
 	<ItemGroup>
-		<PackageReference Include="K4os.Compression.LZ4.Streams" Version="1.2.16" />
-		<PackageReference Include="LZMA-SDK" Version="19.0.0" />
+		<PackageReference Include="K4os.Compression.LZ4.Streams" Version="1.3.8" />
+		<PackageReference Include="LZMA-SDK" Version="22.1.1" />
 		<PackageReference Include="MoonSharp" Version="2.0.0" />
 		<PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
-		<PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
+		<PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.9" />
+        <PackageReference Include="System.Drawing.Common" Version="9.0.9" Condition="$(RuntimeIdentifier.Contains('win'))" />
+        <PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" Condition="!$(RuntimeIdentifier.Contains('win'))" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<PackageReference Include="System.Drawing.Common" Version="7.0.0-*" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<PackageReference Include="System.Drawing.Common" Version="7.0.0-*" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-x64'">
-		<PackageReference Include="SixLabors.ImageSharp" Version="2.1.2" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-arm'">
-		<PackageReference Include="SixLabors.ImageSharp" Version="2.1.2" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-arm64'">
-		<PackageReference Include="SixLabors.ImageSharp" Version="2.1.2" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-musl-x64'">
-		<PackageReference Include="SixLabors.ImageSharp" Version="2.1.2" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-musl-arm'">
-		<PackageReference Include="SixLabors.ImageSharp" Version="2.1.2" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|linux-musl-arm64'">
-		<PackageReference Include="SixLabors.ImageSharp" Version="2.1.2" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|osx-x64'">
-		<PackageReference Include="SixLabors.ImageSharp" Version="2.1.2" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)|$(RuntimeIdentifier)'=='Release|AnyCPU|osx-arm64'">
-		<PackageReference Include="SixLabors.ImageSharp" Version="2.1.2" />
-	</ItemGroup>
+    <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+        <PackageReference Include="System.Drawing.Common" Version="9.0.9" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
+        <PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" Condition="!$([MSBuild]::IsOSPlatform('Windows'))" />
+    </ItemGroup>
 
 	<Import Project="..\PopStudio.Language\PopStudio.Language.projitems" Label="Shared" />
 
 	<Import Project="..\PopStudio.Shared\PopStudio.projitems" Label="Shared" />
-
-
-
-
-
-
-
-
 
 </Project>

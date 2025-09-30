@@ -15,12 +15,11 @@ namespace PopStudio.Platform
             cancelstring = cancel;
             this.ok.Content = ok.Replace("\0", string.Empty);
             this.cancel.Content = cancel.Replace("\0", string.Empty);
-            List<string> items2 = new List<string>();
+            list.Items.Clear();
             for (int i = 0; i < l; i++)
             {
-                items2.Add(items[i]);
+                list.Items.Add(items[i]);
             }
-            list.Items = items2;
             list.SelectedIndex = 0;
         }
 

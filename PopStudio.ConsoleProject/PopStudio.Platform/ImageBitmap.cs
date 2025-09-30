@@ -3,6 +3,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.PixelFormats;
 using System.Buffers;
+using SixLabors.ImageSharp.Formats;
 
 namespace PopStudio.Platform
 {
@@ -44,7 +45,7 @@ namespace PopStudio.Platform
         {
             Configuration customConfig = Configuration.Default.Clone();
             customConfig.PreferContiguousImageBuffers = true;
-            m_image = SixLabors.ImageSharp.Image.Load<Bgra32>(customConfig, stream);
+            m_image = SixLabors.ImageSharp.Image.Load<Bgra32>(new DecoderOptions { Configuration = customConfig }, stream);
             if (!m_image.DangerousTryGetSinglePixelMemory(out Memory<Bgra32> memory))
             {
                 throw new Exception(
@@ -59,7 +60,7 @@ namespace PopStudio.Platform
         {
             Configuration customConfig = Configuration.Default.Clone();
             customConfig.PreferContiguousImageBuffers = true;
-            m_image = SixLabors.ImageSharp.Image.Load<Bgra32>(customConfig, filePath);
+            m_image = SixLabors.ImageSharp.Image.Load<Bgra32>(new DecoderOptions { Configuration = customConfig }, filePath);
             if (!m_image.DangerousTryGetSinglePixelMemory(out Memory<Bgra32> memory))
             {
                 throw new Exception(

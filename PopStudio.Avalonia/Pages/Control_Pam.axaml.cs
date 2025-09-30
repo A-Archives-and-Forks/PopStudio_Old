@@ -15,19 +15,13 @@ namespace PopStudio.Avalonia.Pages
             InitializeComponent();
             LoadControl();
             LoadFont();
-            CB_InMode.Items = new List<string>
-            {
-                "Raw_Binary",
-                "Studio_Json",
-                "Flash_Xfl"
-            };
+            CB_InMode.Items.Add("Raw_Binary");
+            CB_InMode.Items.Add("Studio_Json");
+            CB_InMode.Items.Add("Flash_Xfl");
             CB_InMode.SelectedIndex = 0;
-            CB_OutMode.Items = new List<string>
-            {
-                "Raw_Binary",
-                "Studio_Json",
-                "Flash_Xfl"
-            };
+            CB_OutMode.Items.Add("Raw_Binary");
+            CB_OutMode.Items.Add("Studio_Json");
+            CB_OutMode.Items.Add("Flash_Xfl");
             CB_OutMode.SelectedIndex = 1;
             MAUIStr.OnLanguageChanged += LoadFont;
         }

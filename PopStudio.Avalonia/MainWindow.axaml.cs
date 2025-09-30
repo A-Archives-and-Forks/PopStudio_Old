@@ -23,7 +23,7 @@ namespace PopStudio.Avalonia
             if (Setting.OpenProgramAD) ShowAD(new Random().Next(1, 4));
             Prepare();
             //Binding size changed event
-            this.GetObservable(ClientSizeProperty).Subscribe(Window_SizeChanged);
+            //this.GetObservable(ClientSizeProperty).Subscribe(Window_SizeChanged);
         }
 
         //private void Label_Head_PointerMoved(object sender, global::Avalonia.Input.PointerEventArgs e)
