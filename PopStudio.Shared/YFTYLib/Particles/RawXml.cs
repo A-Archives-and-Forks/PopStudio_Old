@@ -536,13 +536,13 @@ namespace PopStudio.Particles
                                 sw.Write("  <EmitterType>");
                                 if (flags < 0 || flags > 4)
                                 {
-                                    sw.Write(EmitterType[flags]);
-                                }
-                                else
-                                {
                                     sw.Write("Emitter(");
                                     sw.Write(flags);
                                     sw.Write(')');
+                                }
+                                else
+                                {
+                                    sw.Write(EmitterType[flags]);
                                 }
                                 sw.Write("</EmitterType>\n");
                             }
