@@ -89,20 +89,11 @@ namespace PopStudio.Platform
             ConsoleWriter.WriteSuccessLine(MAUIStr.Obj.Share_Finish, s.ElapsedMilliseconds / 1000m);
         }
 
-        public override void InternalDecodePam(string inFile, string outFile)
+        public override void InternalPam(string inFile, string outFile, int informat, int outformat)
         {
             Stopwatch s = new Stopwatch();
             s.Start();
-            base.InternalDecodePam(inFile, outFile);
-            s.Stop();
-            ConsoleWriter.WriteSuccessLine(MAUIStr.Obj.Share_Finish, s.ElapsedMilliseconds / 1000m);
-        }
-
-        public override void InternalEncodePam(string inFile, string outFile)
-        {
-            Stopwatch s = new Stopwatch();
-            s.Start();
-            base.InternalEncodePam(inFile, outFile);
+            base.InternalPam(inFile, outFile, informat, outformat);
             s.Stop();
             ConsoleWriter.WriteSuccessLine(MAUIStr.Obj.Share_Finish, s.ElapsedMilliseconds / 1000m);
         }
