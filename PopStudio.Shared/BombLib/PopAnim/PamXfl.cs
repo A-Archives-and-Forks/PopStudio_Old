@@ -1071,7 +1071,7 @@ namespace PopStudio.PopAnim
 
         private static void resize_fs(string directory, int resolution)
         {
-            var extra = jsonReadFile<PopAnimInfo>($"{directory}/extra.json");
+            var extra = jsonReadFile($"{directory}/extra.json");
             var document = extra.image.Select((e, i) => (xmlReadFile($"{directory}/LIBRARY/source/source_{i + 1}.xml"))).ToArray();
             resize(document, resolution);
             document.Select((e, i) =>
@@ -1201,7 +1201,7 @@ namespace PopStudio.PopAnim
 
         private static FlashPackage load_flash_package(string directory)
         {
-            var extra = jsonReadFile<PopAnimInfo>($"{directory}/extra.json");
+            var extra = jsonReadFile($"{directory}/extra.json");
             var document = xmlReadFile($"{directory}/DOMDocument.xml");
             FlashPackage.Library library = new()
             {
@@ -1274,19 +1274,14 @@ namespace PopStudio.PopAnim
         private static void jsonWriteFile(string outFile, PopAnimInfo data)
         {
             using FileStream file = File.OpenWrite(outFile);
-            JsonSerializerOptions setting = new()
-            {
-                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                WriteIndented = true
-            };
-            JsonSerializer.Serialize(file, data, setting);
+            JsonSerializer.Serialize(file, data, PamJsonContext.Instance.PopAnimInfo);
         }
 
-        private static T jsonReadFile<T>(string file)
+        private static PopAnimInfo jsonReadFile(string file)
         {
             string jsonString = File.ReadAllText(file);
 
-            return JsonSerializer.Deserialize<T>(jsonString)!;// XDocument.Load(file).Root;
+            return JsonSerializer.Deserialize(jsonString, PamJsonContext.Instance.PopAnimInfo)!;// XDocument.Load(file).Root;
         }
     }
 }

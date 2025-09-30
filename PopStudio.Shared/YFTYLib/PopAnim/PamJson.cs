@@ -9,7 +9,7 @@ namespace PopStudio.PopAnim
         {
             using (BinaryStream bs = new BinaryStream(inFile, FileMode.Open))
             {
-                return JsonSerializer.Deserialize<PopAnimInfo>(bs, new JsonSerializerOptions { AllowTrailingCommas = true });
+                return JsonSerializer.Deserialize(bs, PamJsonContext.Instance.PopAnimInfo);
             }
         }
 
@@ -17,11 +17,7 @@ namespace PopStudio.PopAnim
         {
             using (BinaryStream bs = new BinaryStream(outFile, FileMode.Create))
             {
-                JsonSerializer.Serialize(bs, pam, new JsonSerializerOptions
-                {
-                    Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                    WriteIndented = true
-                });
+                JsonSerializer.Serialize(bs, pam, PamJsonContext.Instance.PopAnimInfo);
             }
         }
     }
