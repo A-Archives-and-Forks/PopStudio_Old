@@ -308,12 +308,12 @@ namespace PopStudio.Avalonia.Pages
                 Content = text,
                 FontSize = 18,
                 BorderThickness = new Thickness(1),
-                BorderBrush = Brushes.Black,
                 Background = Brushes.Transparent,
-                Foreground = Brushes.Black,
                 Padding = new Thickness(0, 5),
                 CornerRadius = new CornerRadius(0)
             };
+            b.Bind(Button.ForegroundProperty, Application.Current!.GetResourceObservable("SystemControlForegroundBaseHighBrush"));
+            b.Bind(Button.BorderBrushProperty, Application.Current!.GetResourceObservable("SystemControlForegroundBaseHighBrush"));
             b.Click += OnClicked;
             stack.Children.Add(b);
         }

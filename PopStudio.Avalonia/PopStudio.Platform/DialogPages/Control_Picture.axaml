@@ -6,7 +6,7 @@
              x:Class="PopStudio.Platform.Control_Picture"
 			 Height="400"
 			 Width="450"
-             Background="White">
+             Background="{DynamicResource SystemControlPageBackgroundAltHighBrush}">
 	<Grid Margin="10 10 10 10">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />

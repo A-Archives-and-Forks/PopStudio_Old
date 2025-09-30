@@ -69,7 +69,7 @@
 					<Label x:Name="Label_Head" Margin="10 0 0 0" VerticalContentAlignment="Center" FontSize="18" Foreground="White" />
 				</StackPanel>
 
-				<ContentControl x:Name="PageControl" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"/>
+				<ContentControl x:Name="PageControl" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource SystemControlPageBackgroundAltHighBrush}"/>
 			</Grid>
 
 			<Grid Grid.Column="1" Background="#66000000" ZIndex="2" IsVisible="False" x:Name="MyShellContent_Small">
