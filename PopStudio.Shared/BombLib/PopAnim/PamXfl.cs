@@ -1274,14 +1274,14 @@ namespace PopStudio.PopAnim
         private static void jsonWriteFile(string outFile, PopAnimInfo data)
         {
             using FileStream file = File.OpenWrite(outFile);
-            JsonSerializer.Serialize(file, data, PamJsonContext.Instance.PopAnimInfo);
+            JsonSerializer.Serialize(file, data, PamJsonContext.Default.PopAnimInfo);
         }
 
         private static PopAnimInfo jsonReadFile(string file)
         {
             string jsonString = File.ReadAllText(file);
 
-            return JsonSerializer.Deserialize(jsonString, PamJsonContext.Instance.PopAnimInfo)!;// XDocument.Load(file).Root;
+            return JsonSerializer.Deserialize(jsonString, PamJsonContext.Default.PopAnimInfo)!;// XDocument.Load(file).Root;
         }
     }
 }
