@@ -370,7 +370,7 @@
         public string HomePage_Course_String => "教学视频：";
         public string HomePage_Course => "https://space.bilibili.com/411256864";
         public string HomePage_AppNewNotice_String => "更新公告：";
-        public string HomePage_AppNewNotice => "1.支持Pam Xfl转换；\n2.支持WebAssembly平台。";
+        public string HomePage_AppNewNotice => "1.修复dz文件无法解包的问题；\n2.修复粒子特效转为xml格式时Emitter格式错误的问题；\n3.支持深色模式；\n4.更换广告。";
         //Share
         public string Share_FileNotFound => "文件{0}不存在！";
         public string Share_FolderNotFound => "文件夹{0}不存在！";

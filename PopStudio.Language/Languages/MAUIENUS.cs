@@ -370,7 +370,7 @@
         public string HomePage_Course_String => "Course Video:";
         public string HomePage_Course => "https://space.bilibili.com/411256864";
         public string HomePage_AppNewNotice_String => "Update announcement:";
-        public string HomePage_AppNewNotice => "1. Support pam xfl transcoding; \n2. Support WebAssembly platform. ";
+        public string HomePage_AppNewNotice => "1. Fix the issue with unpacking dz files;\n2. Fix incorrect Emitter format when converting particles to XML;\n3. Add support for dark mode;\n4. Update advertisements.";
         //Share
         public string Share_FileNotFound => "File {0} does not exist! ";
         public string Share_FolderNotFound => "Folder {0} does not exist! ";
