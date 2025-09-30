@@ -40,7 +40,7 @@ namespace PopStudio.Texture
                 t = true;
             }
             byte[] packets = new byte[(newwidth * newheight) >> 1];
-            bs.Read(packets, 0, packets.Length);
+            bs.ReadExactly(packets, 0, packets.Length);
             YFBitmap image = YFBitmap.Create(newwidth, newheight);
             YFColor* pixels = (YFColor*)image.GetPixels().ToPointer();
             fixed (byte* bbb = packets)

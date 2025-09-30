@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Buffers;
+using System.Text;
 
 namespace PopStudio.Plugin
 {
@@ -90,6 +91,11 @@ namespace PopStudio.Plugin
         public int Read(byte[] buffer, int offset, int count)
         {
             return BaseStream.Read(buffer, offset, count);
+        }
+        
+        public void ReadExactly(byte[] buffer, int offset, int count)
+        {
+            BaseStream.ReadExactly(buffer, offset, count);
         }
 
         //校验数据
@@ -628,7 +634,7 @@ namespace PopStudio.Plugin
         public byte[] ReadBytes(int count, Endian _ = Endian.Null)
         {
             byte[] array = new byte[count];
-            BaseStream.Read(array, 0, count);
+            BaseStream.ReadExactly(array, 0, count);
             return array;
         }
 
@@ -1261,23 +1267,26 @@ namespace PopStudio.Plugin
             }
         }
 
-        public void CopyTo(Stream s, long Length)
+        public void CopyTo(Stream s, long length)
         {
-            byte[] array = new byte[81920];
-            int count;
-            int length2 = array.Length;
-            long times = Length / length2;
-            for (long i = 0; i < times; i++)
+            const int bufferSize = 81920;
+            byte[] array = null;
+            try
             {
-                count = Read(array, 0, length2);
-                if (count == 0) return;
-                s.Write(array, 0, count);
+                array = ArrayPool<byte>.Shared.Rent(bufferSize);
+                int count;
+                while (length != 0 && (count = Read(array, 0, (int)Math.Min(bufferSize, length))) != 0)
+                {
+                    s.Write(array, 0, count);
+                    length -= count;
+                }
             }
-            length2 = (int)(Length % length2);
-            if (length2 != 0)
+            finally
             {
-                Read(array, 0, length2);
-                s.Write(array, 0, length2);
+                if (array != null)
+                {
+                    ArrayPool<byte>.Shared.Return(array);
+                }
             }
         }
 
@@ -1288,26 +1297,6 @@ namespace PopStudio.Plugin
             while ((count = Read(array, 0, array.Length)) != 0)
             {
                 s.Write(array, 0, count);
-            }
-        }
-
-        public void CopyTo(Stream s, long Length, byte[] array)
-        {
-            array ??= new byte[81920];
-            int count;
-            int length2 = array.Length;
-            long times = Length / length2;
-            for (long i = 0; i < times; i++)
-            {
-                count = Read(array, 0, length2);
-                if (count == 0) return;
-                s.Write(array, 0, count);
-            }
-            length2 = (int)(Length % length2);
-            if (length2 != 0)
-            {
-                Read(array, 0, length2);
-                s.Write(array, 0, length2);
             }
         }
 

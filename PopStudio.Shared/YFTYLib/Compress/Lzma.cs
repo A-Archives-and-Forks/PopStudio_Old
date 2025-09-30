@@ -10,9 +10,9 @@
                 using (FileStream output = new FileStream(outFile, FileMode.Create))
                 {
                     byte[] properties = new byte[5];
-                    input.Read(properties, 0, 5);
+                    input.ReadExactly(properties, 0, 5);
                     byte[] fileLengthBytes = new byte[8];
-                    input.Read(fileLengthBytes, 0, 8);
+                    input.ReadExactly(fileLengthBytes, 0, 8);
                     long fileLength = BitConverter.ToInt64(fileLengthBytes, 0);
                     coder.SetDecoderProperties(properties);
                     coder.Code(input, output, input.Length, fileLength, null);
