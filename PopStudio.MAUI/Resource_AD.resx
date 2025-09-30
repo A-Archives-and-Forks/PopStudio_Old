@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AD1" xml:space="preserve">
-    <value>http://pvz.jiangnangame.com/</value>
+    <value>https://space.bilibili.com/411256864/</value>
   </data>
   <data name="AD2" xml:space="preserve">
-    <value>http://www.pvzhome.com/resources/69/</value>
+    <value>https://www.pvz2shuttle.cn/</value>
   </data>
   <data name="AD3" xml:space="preserve">
-    <value>https://iflynote.com/h/s/doc/zLhyVbgjjYqZRS9Q</value>
+    <value>https://space.bilibili.com/525659346</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ImageAD1" type="System.Resources.ResXFileRef, System.Windows.Forms">
