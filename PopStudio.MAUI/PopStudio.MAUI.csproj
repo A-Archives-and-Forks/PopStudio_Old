@@ -7,6 +7,7 @@
 		<AndroidSigningKeyPass>PopStudio</AndroidSigningKeyPass>
 		<AndroidSigningStorePass>PopStudio</AndroidSigningStorePass>
         <AndroidPackageFormat>apk</AndroidPackageFormat>
+		<RuntimeIdentifiers>android-arm;android-x86;android-arm64;android-x64</RuntimeIdentifiers>
 	</PropertyGroup>
 
 	<PropertyGroup>
