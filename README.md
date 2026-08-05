@@ -21,6 +21,7 @@ decode and encode tex(including Android and iOS)
 decode and encode txz(including Android and iOS)  
 decode and encode xnb(including WindowsPhone)  
 decode and encode reanim.compiled(including Windows, MacOS, Android, iOS, WindowsPhone, PS3, PSV and Xbox360)  
+convert unpacked XFL projects and modern ZIP-based FLA files to any supported reanim format
 decode and encode xml.compiled(including Windows, MacOS, Android, iOS, WindowsPhone, PS3, PSV and Xbox360)  
 decode and encode trail.compiled(including Windows, MacOS, Android, iOS, WindowsPhone, PS3, PSV and Xbox360)  
 decode and encode pam(including version 1-6)  
@@ -65,6 +66,7 @@ In Chinese:
 解码编码txz（包括Android，iOS）  
 解码编码xnb（包括WindowsPhone）  
 解码编码reanim.compiled(包括Windows，MacOS，Android，iOS，WindowsPhone，PS3，PSV和Xbox360)  
+将未打包的XFL工程和现代ZIP型FLA文件转换为任意已支持的reanim格式
 解码编码xml.compiled(包括Windows，MacOS，Android，iOS，WindowsPhone，PS3，PSV和Xbox360)  
 解码编码trail.compiled(包括Windows，MacOS，Android，iOS，WindowsPhone，PS3，PSV和Xbox360)  
 解码编码pam（包括版本号1-6的）  
@@ -85,4 +87,4 @@ ___
 [Real-Time DXT Compression](https://www.researchgate.net/publication/259000525_Real-Time_DXT_Compression)用于编码DXT纹理。  
 [EveryFileExplorer](https://github.com/Gericom/EveryFileExplorer)用于编码ETC1纹理。  
 [pvrtccompressor](https://bitbucket.org/jthlim/pvrtccompressor)用于编码PVRTCI纹理。  
-[PVR Native SDK](https://github.com/powervr-graphics/Native_SDK)用于解码PVRTCI纹理。  
+[PVR Native SDK](https://github.com/powervr-graphics/Native_SDK)用于解码PVRTCI纹理。

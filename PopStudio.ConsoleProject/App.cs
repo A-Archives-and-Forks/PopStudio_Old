@@ -402,6 +402,10 @@ namespace PopStudio.ConsoleProject
                 codeList.Add(CommandCode.SpliceImage_AtlasImageDat);
                 codeList.Add(CommandCode.SpliceImage_TVAtlasXml);
                 codeList.Add(CommandCode.SpliceImage_ResRTON);
+                if (File.Exists(Path.Combine(filePath, "DOMDocument.xml")))
+                {
+                    AddReanimConversions(codeList);
+                }
             }
             else
             {
@@ -478,6 +482,10 @@ namespace PopStudio.ConsoleProject
                     default:
                         switch (Ex1)
                         {
+                            case ".xfl":
+                            case ".fla":
+                                AddReanimConversions(codeList);
+                                break;
                             case ".dz":
                                 codeList.Add(CommandCode.Unpack_Dz);
                                 break;
@@ -716,6 +724,19 @@ namespace PopStudio.ConsoleProject
                 }));
             }
             return sb.ToString();
+        }
+
+        static void AddReanimConversions(List<CommandCode> codeList)
+        {
+            codeList.Add(CommandCode.Reanim_ToPCCompiled);
+            codeList.Add(CommandCode.Reanim_ToPhone32Compiled);
+            codeList.Add(CommandCode.Reanim_ToPhone64Compiled);
+            codeList.Add(CommandCode.Reanim_ToWPXnb);
+            codeList.Add(CommandCode.Reanim_ToGameConsoleCompiled);
+            codeList.Add(CommandCode.Reanim_ToTVCompiled);
+            codeList.Add(CommandCode.Reanim_ToStudioJson);
+            codeList.Add(CommandCode.Reanim_ToRawXml);
+            codeList.Add(CommandCode.Reanim_ToFlashXfl);
         }
 
         enum CommandCode

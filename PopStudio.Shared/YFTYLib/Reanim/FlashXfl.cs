@@ -7,7 +7,7 @@ namespace PopStudio.Reanim
 {
     internal class FlashXfl
     {
-        public static Reanim Decode(string inFile) => throw new NotImplementedException();
+        public static Reanim Decode(string inFile) => FlashXflDecoder.Decode(inFile);
 
         public static void Encode(Reanim reanim, string outFile)
         {

@@ -33,6 +33,7 @@ namespace PopStudio.MAUI
             CB_InMode.Items.Add("TV_Compiled");
             CB_InMode.Items.Add("Studio_Json");
             CB_InMode.Items.Add("Raw_Xml");
+            CB_InMode.Items.Add("Flash_Xfl_Folder");
             CB_InMode.SelectedIndex = 0;
             CB_OutMode.Items.Clear();
             CB_OutMode.Items.Add("PC_Compiled");
@@ -70,7 +71,7 @@ namespace PopStudio.MAUI
                 sw.Start();
                 try
                 {
-                    if (!File.Exists(inFile))
+                    if (!File.Exists(inFile) && !(inmode == 8 && Directory.Exists(inFile)))
                     {
                         throw new Exception(string.Format(MAUIStr.Obj.Share_FileNotFound, inFile));
                     }
@@ -102,7 +103,9 @@ namespace PopStudio.MAUI
 		{
 			try
 			{
-				string val = await this.ChooseOpenFile(); //Can't default this
+				string val = CB_InMode.SelectedIndex == 8
+                    ? await this.ChooseFolder()
+                    : await this.ChooseOpenFile(); //Can't default this
                 if (!string.IsNullOrEmpty(val)) textbox1.Text = val;
 			}
 			catch (Exception)
