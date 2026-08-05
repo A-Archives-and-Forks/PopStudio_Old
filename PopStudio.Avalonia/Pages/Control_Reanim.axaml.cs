@@ -24,6 +24,7 @@ namespace PopStudio.Avalonia.Pages
             CB_InMode.Items.Add("Studio_Json");
             CB_InMode.Items.Add("Raw_Xml");
             CB_InMode.Items.Add("Flash_Xfl_Folder");
+            CB_InMode.Items.Add("Flash_Fla");
             CB_InMode.SelectedIndex = 0;
             CB_OutMode.Items.Add("PC_Compiled");
             CB_OutMode.Items.Add("Phone32_Compiled");
@@ -35,6 +36,7 @@ namespace PopStudio.Avalonia.Pages
             CB_OutMode.Items.Add("Raw_Xml");
             CB_OutMode.Items.Add("Flash_Xfl_Folder");
             CB_OutMode.Items.Add("Godot_Anim");
+            CB_OutMode.Items.Add("Flash_Fla");
             CB_OutMode.SelectedIndex = 7;
             MAUIStr.OnLanguageChanged += LoadFont;
         }
@@ -154,6 +156,7 @@ namespace PopStudio.Avalonia.Pages
                         7 => ".reanim",
                         8 => ".xfl",
                         9 => ".scn",
+                        10 => ".fla",
                         _ => null
                     };
                     if (batchmode)
@@ -177,12 +180,16 @@ namespace PopStudio.Avalonia.Pages
                             6 => ".reanim.json",
                             7 => ".reanim",
                             8 => ".xfl",
+                            9 => null,
                             _ => null
                         };
-                        int rightFormatLength = rightFormat.Length;
+                        int rightFormatLength = rightFormat?.Length ?? 0;
                         foreach (string mfile in files)
                         {
-                            if (mfile.Length < rightFormatLength || mfile[^rightFormatLength..].ToLower() != rightFormat)
+                            bool matchesInputFormat = inmode == 9
+                                ? PopStudio.Reanim.FlashFla.IsZipXfl(mfile)
+                                : mfile.Length >= rightFormatLength && mfile[^rightFormatLength..].ToLower() == rightFormat;
+                            if (!matchesInputFormat)
                             {
                                 continue;
                             }

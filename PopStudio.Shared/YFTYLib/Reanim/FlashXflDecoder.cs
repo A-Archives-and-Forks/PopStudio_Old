@@ -13,7 +13,40 @@ namespace PopStudio.Reanim
 
         public static Reanim Decode(string inFile)
         {
-            XflProject project = XflProject.Load(inFile);
+            return Decode(XflProject.Load(inFile));
+        }
+
+        public static Reanim DecodeArchive(string inFile)
+        {
+            return Decode(XflProject.LoadArchive(inFile));
+        }
+
+        public static bool IsZipXflFile(string inFile)
+        {
+            if (!File.Exists(inFile)) return false;
+            try
+            {
+                using FileStream stream = new FileStream(inFile, FileMode.Open, FileAccess.Read, FileShare.Read);
+                using ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read, false);
+                return archive.Entries.Any(entry => !string.IsNullOrEmpty(entry.Name)
+                    && string.Equals(entry.Name, "DOMDocument.xml", StringComparison.OrdinalIgnoreCase));
+            }
+            catch (InvalidDataException)
+            {
+                return false;
+            }
+            catch (IOException)
+            {
+                return false;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return false;
+            }
+        }
+
+        private static Reanim Decode(XflProject project)
+        {
             XflTimeline timeline = project.MainTimeline;
             int totalFrames = timeline.FrameCount;
             List<ReanimTrack> tracks = new List<ReanimTrack>();
@@ -635,14 +668,9 @@ namespace PopStudio.Reanim
             {
                 if (string.IsNullOrWhiteSpace(inFile)) throw new ArgumentException("An XFL path is required.", nameof(inFile));
                 string source = Path.GetFullPath(inFile);
-                if (File.Exists(source) && string.Equals(Path.GetExtension(source), ".fla", StringComparison.OrdinalIgnoreCase))
+                if (IsZipXflFile(source))
                 {
-                    Dictionary<string, string> archive = ReadFlaXml(source);
-                    if (!archive.TryGetValue("domdocument.xml", out string xml))
-                    {
-                        throw new InvalidDataException("The FLA archive does not contain DOMDocument.xml.");
-                    }
-                    return new XflProject(Path.GetDirectoryName(source), archive, ParseDocument(xml));
+                    return LoadArchive(source);
                 }
 
                 string root = Directory.Exists(source) ? source : Path.GetDirectoryName(source);
@@ -661,6 +689,19 @@ namespace PopStudio.Reanim
                     throw new FileNotFoundException("Could not find DOMDocument.xml for the XFL project.", inFile);
                 }
                 return new XflProject(root, null, LoadDocument(Path.Combine(root, "DOMDocument.xml")));
+            }
+
+            public static XflProject LoadArchive(string inFile)
+            {
+                if (string.IsNullOrWhiteSpace(inFile)) throw new ArgumentException("A ZIP-XFL archive path is required.", nameof(inFile));
+                string source = Path.GetFullPath(inFile);
+                if (!File.Exists(source)) throw new FileNotFoundException("The ZIP-XFL archive was not found.", inFile);
+                Dictionary<string, string> archive = ReadFlaXml(source);
+                if (!archive.TryGetValue("domdocument.xml", out string xml))
+                {
+                    throw new InvalidDataException("The ZIP-XFL archive does not contain DOMDocument.xml.");
+                }
+                return new XflProject(Path.GetDirectoryName(source), archive, ParseDocument(xml));
             }
 
             public XflLibraryItem FindLibraryItem(string name)
@@ -705,7 +746,7 @@ namespace PopStudio.Reanim
                 }
                 catch (InvalidDataException exception)
                 {
-                    throw new InvalidDataException("Only modern ZIP-based FLA files are supported; export legacy FLA files as XFL first.", exception);
+                    throw new InvalidDataException("The input is not a readable ZIP-XFL archive.", exception);
                 }
                 using (archive)
                 {

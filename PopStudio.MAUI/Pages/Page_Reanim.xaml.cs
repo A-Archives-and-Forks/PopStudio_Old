@@ -34,6 +34,7 @@ namespace PopStudio.MAUI
             CB_InMode.Items.Add("Studio_Json");
             CB_InMode.Items.Add("Raw_Xml");
             CB_InMode.Items.Add("Flash_Xfl_Folder");
+            CB_InMode.Items.Add("Flash_Fla");
             CB_InMode.SelectedIndex = 0;
             CB_OutMode.Items.Clear();
             CB_OutMode.Items.Add("PC_Compiled");
@@ -46,6 +47,7 @@ namespace PopStudio.MAUI
             CB_OutMode.Items.Add("Raw_Xml");
             CB_OutMode.Items.Add("Flash_Xfl_Folder");
             CB_OutMode.Items.Add("Godot_Anim");
+            CB_OutMode.Items.Add("Flash_Fla");
             CB_OutMode.SelectedIndex = 7;
             MAUIStr.OnLanguageChanged += LoadFont;
         }

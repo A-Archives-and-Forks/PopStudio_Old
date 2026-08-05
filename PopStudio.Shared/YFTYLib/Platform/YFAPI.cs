@@ -247,11 +247,15 @@
         public virtual void InternalParseReanim(string inFile, string outFile, int outformat)
         {
             Reanim.Reanim reanim = null;
+            bool isFla = PopStudio.Reanim.FlashFla.IsZipXfl(inFile);
             bool isXfl = (Directory.Exists(inFile) && File.Exists(Path.Combine(inFile, "DOMDocument.xml")))
                 || string.Equals(Path.GetExtension(inFile), ".xfl", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(Path.GetExtension(inFile), ".fla", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(Path.GetFileName(inFile), "DOMDocument.xml", StringComparison.OrdinalIgnoreCase);
-            if (isXfl)
+            if (isFla)
+            {
+                reanim = PopStudio.Reanim.FlashFla.Decode(inFile);
+            }
+            else if (isXfl)
             {
                 reanim = PopStudio.Reanim.FlashXfl.Decode(inFile);
             }
@@ -291,6 +295,7 @@
                 case 7: PopStudio.Reanim.RawXml.Encode(reanim, outFile); break;
                 case 8: PopStudio.Reanim.FlashXfl.Encode(reanim, outFile); break;
                 case 9: PopStudio.Reanim.Godot.Encode(reanim, outFile); break;
+                case 10: PopStudio.Reanim.FlashFla.Encode(reanim, outFile); break;
                 default: throw new NotImplementedException();
             }
         }
@@ -388,6 +393,7 @@
                 6 => PopStudio.Reanim.ReanimJson.Decode(inFile),
                 7 => PopStudio.Reanim.RawXml.Decode(inFile),
                 8 => PopStudio.Reanim.FlashXfl.Decode(inFile),
+                9 => PopStudio.Reanim.FlashFla.Decode(inFile),
                 _ => throw new NotImplementedException()
             };
             switch (outformat)
@@ -402,6 +408,7 @@
                 case 7: PopStudio.Reanim.RawXml.Encode(reanim, outFile); break;
                 case 8: PopStudio.Reanim.FlashXfl.Encode(reanim, outFile); break;
                 case 9: PopStudio.Reanim.Godot.Encode(reanim, outFile); break;
+                case 10: PopStudio.Reanim.FlashFla.Encode(reanim, outFile); break;
                 default: throw new NotImplementedException();
             }
         }
